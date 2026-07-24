@@ -23,10 +23,10 @@
   <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
   
-  <!-- Babel Compiler for JSX in the Browser -->
+  <!-- Babel Compiler for JSX in Browser -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-  <!-- Lucide Icon Library (v0.284.0) -->
+  <!-- Lucide Icon Library -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
@@ -42,7 +42,7 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* Print-specific layout optimization for the 1-Page Resume */
+    /* Print-specific layout optimization for 1-Page Resume */
     @media print {
       body * {
         visibility: hidden !important;
@@ -65,29 +65,27 @@
 </head>
 <body class="bg-[#fafaf9] text-stone-800 antialiased selection:bg-indigo-600 selection:text-white pb-16 print:pb-0 print:bg-white">
 
-  <!-- Interactive Network Canvas (Behind Everything) -->
+  <!-- Interactive Network Canvas -->
   <canvas id="bg-network-canvas" class="fixed inset-0 pointer-events-auto z-0 select-none block"></canvas>
 
-  <!-- Creative Ambient Blurred Background Images (Uses uploaded photos) -->
+  <!-- Ambient Blurred Background Images -->
   <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none opacity-[0.25] select-none">
-    <!-- Top Left Close-up Portrait Blur -->
     <div class="absolute top-[-10%] left-[-15%] w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] rounded-full overflow-hidden blur-[120px]">
       <img src="./sushree_close.jpg" alt="" class="w-full h-full object-cover scale-150 rotate-12" onerror="this.style.display='none'">
     </div>
-    <!-- Bottom Right Standing Pose Blur -->
     <div class="absolute bottom-[-10%] right-[-15%] w-[70vw] h-[70vw] max-w-[900px] max-h-[900px] rounded-full overflow-hidden blur-[140px]">
       <img src="./sushree_standing.jpg" alt="" class="w-full h-full object-cover scale-150 -rotate-12" onerror="this.style.display='none'">
     </div>
   </div>
 
-  <!-- React Mounting Root -->
+  <!-- React Mount Point -->
   <div id="portfolio-app" class="relative z-10"></div>
 
   <!-- React Code Component using Babel -->
   <script type="text/babel">
     const { useState, useEffect, useRef } = React;
 
-    // --- STATIC DATA CONFIGURATION ---
+    // Static Data
     const PERSONAL_DETAILS = {
       name: "SUSHREE SANGITA PANDA",
       title: "Senior Account Manager | International SMS & Carrier Relations",
@@ -169,13 +167,12 @@
 
     const SEED_ROUTES = [
       { id: "route-1", source: "India", destination: "Malta", carrier: "Ok Route Premium", rate: 0.012, margin: 18, latency: 120, volume: 45000, status: "active" },
-      { id: "route-2", id: "route-2", source: "Malta", destination: "Singapore", carrier: "ICS Global Transit", rate: 0.008, margin: 22, latency: 180, volume: 120000, status: "active" },
+      { id: "route-2", source: "Malta", destination: "Singapore", carrier: "ICS Global Transit", rate: 0.008, margin: 22, latency: 180, volume: 120000, status: "active" },
       { id: "route-3", source: "Singapore", destination: "Lebanon", carrier: "ICS Direct Routing", rate: 0.019, margin: 15, latency: 240, volume: 32000, status: "testing" },
       { id: "route-4", source: "India", destination: "Singapore", carrier: "SMS Cloud Hub Direct", rate: 0.005, margin: 12, latency: 85, volume: 250000, status: "active" },
       { id: "route-5", source: "Lebanon", destination: "Malta", carrier: "Ok Route Transit Link", rate: 0.015, margin: 20, latency: 145, volume: 18000, status: "congested" }
     ];
 
-    // --- REACT APPLICATION ENTRY POINT ---
     function PortfolioApp() {
       const [scrolled, setScrolled] = useState(false);
       const [showScrollTop, setShowScrollTop] = useState(false);
@@ -186,7 +183,6 @@
           setShowScrollTop(window.scrollY > 400);
         };
         window.addEventListener('scroll', handleScroll);
-        // Trigger lucide icons initialization
         setTimeout(() => {
           if (window.lucide) window.lucide.createIcons();
         }, 300);
@@ -204,7 +200,6 @@
 
       return (
         <div className="min-h-screen flex flex-col justify-between">
-          {/* Header */}
           <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 print:hidden ${
             scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-200 py-3' : 'bg-transparent py-5'
           }`}>
@@ -226,14 +221,11 @@
             </div>
           </header>
 
-          {/* Main */}
           <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 space-y-24 print:pt-0 print:space-y-0">
-            {/* Hero Section */}
             <section id="hero-intro" className="scroll-mt-28 print:hidden">
               <HeroComponent scrollToSection={scrollToSection} />
             </section>
 
-            {/* Simulated Live Lab */}
             <section id="simulator-section" className="scroll-mt-28 print:hidden">
               <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
                 <div>
@@ -241,41 +233,37 @@
                   <p className="text-sm text-stone-600 mt-1">An executive telecom playground demonstrating her specialized industry expertise.</p>
                 </div>
                 <div className="flex items-center gap-2 text-xs font-mono bg-stone-100 text-stone-600 px-3 py-1 rounded border border-stone-200">
-                  <i data-lucide="terminal" class="w-3.5 h-3.5"></i> SIMULATION ENGINE ACTIVE
+                  <i data-lucide="terminal" className="w-3.5 h-3.5"></i> SIMULATION ENGINE ACTIVE
                 </div>
               </div>
               <NetworkSimulator />
             </section>
 
-            {/* Experience Section */}
             <section id="experience-timeline-section" className="scroll-mt-28 print:hidden">
               <div className="mb-10">
                 <h2 className="text-2xl md:text-3xl font-extrabold text-stone-900 tracking-tight flex items-center gap-2">
-                  <i data-lucide="briefcase" class="text-indigo-600 w-6 h-6"></i> Professional Track Record
+                  <i data-lucide="briefcase" className="text-indigo-600 w-6 h-6"></i> Professional Track Record
                 </h2>
                 <p className="text-sm text-stone-600 mt-1">3+ years driving margin expansions and vendor deals at leading telecom providers.</p>
               </div>
               <InteractiveTimeline />
             </section>
 
-            {/* Skills Section */}
             <section id="competencies-matrix-section" className="scroll-mt-28 print:hidden">
               <div className="mb-8">
                 <h2 className="text-2xl md:text-3xl font-extrabold text-stone-900 tracking-tight flex items-center gap-2">
-                  <i data-lucide="award" class="text-indigo-600 w-6 h-6"></i> Executive Competencies
+                  <i data-lucide="award" className="text-indigo-600 w-6 h-6"></i> Executive Competencies
                 </h2>
                 <p className="text-sm text-stone-600 mt-1">Refined strategic abilities crossing technical telecom operations, wholesale pricing, and executive management.</p>
               </div>
               <CompetencyGrid />
             </section>
 
-            {/* Printable PDF CV */}
             <section id="pdf-resume-section" className="scroll-mt-24 print:m-0 print:p-0">
               <PDFResume />
             </section>
           </main>
 
-          {/* Footer */}
           <footer className="mt-32 border-t border-stone-200/60 bg-white/40 backdrop-blur-sm py-12 text-stone-500 text-sm relative z-10 print:hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
@@ -297,17 +285,15 @@
             </div>
           </footer>
 
-          {/* Back to Top */}
           {showScrollTop && (
             <button onClick={scrollToTop} className="fixed bottom-6 right-6 z-50 p-3 bg-stone-900 hover:bg-indigo-600 text-white rounded-full shadow-lg transition">
-              <i data-lucide="arrow-up" class="w-4 h-4"></i>
+              <i data-lucide="arrow-up" className="w-4 h-4"></i>
             </button>
           )}
         </div>
       );
     }
 
-    // --- HERO COMPONENT ---
     function HeroComponent({ scrollToSection }) {
       const [activePhoto, setActivePhoto] = useState('close');
       const [imageErrorClose, setImageErrorClose] = useState(false);
@@ -320,7 +306,7 @@
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-stone-100 text-stone-800 border border-stone-200">
-                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-indigo-600"></i> Executive Telecom Portfolio
+                <i data-lucide="sparkles" className="w-3.5 h-3.5 text-indigo-600"></i> Executive Telecom Portfolio
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-stone-900 leading-[1.1]">
                 Sushree Sangita <span className="text-indigo-600">Panda</span>
@@ -333,16 +319,16 @@
               </p>
               <div className="flex flex-wrap justify-center lg:justify-start gap-3 text-xs font-medium text-stone-700">
                 <span className="flex items-center gap-1.5 bg-white border border-stone-200 px-3 py-1.5 rounded-full shadow-sm">
-                  <i data-lucide="mail" class="w-3.5 h-3.5 text-stone-400"></i> sushreesangitapanda1999@gmail.com
+                  <i data-lucide="mail" className="w-3.5 h-3.5 text-stone-400"></i> sushreesangitapanda1999@gmail.com
                 </span>
                 <span className="flex items-center gap-1.5 bg-white border border-stone-200 px-3 py-1.5 rounded-full shadow-sm">
-                  <i data-lucide="phone" class="w-3.5 h-3.5 text-stone-400"></i> +91 6371069149
+                  <i data-lucide="phone" className="w-3.5 h-3.5 text-stone-400"></i> +91 6371069149
                 </span>
                 <span className="flex items-center gap-1.5 bg-white border border-stone-200 px-3 py-1.5 rounded-full shadow-sm">
-                  <i data-lucide="map-pin" class="w-3.5 h-3.5 text-stone-400"></i> India
+                  <i data-lucide="map-pin" className="w-3.5 h-3.5 text-stone-400"></i> India
                 </span>
                 <a href="https://linkedin.com/in/sushreesangita-panda-5b4084255" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 bg-white border border-stone-200 hover:border-indigo-300 px-3 py-1.5 rounded-full shadow-sm transition group">
-                  <i data-lucide="linkedin" class="w-3.5 h-3.5 text-stone-400 group-hover:text-indigo-600"></i> LinkedIn Profile
+                  <i data-lucide="linkedin" className="w-3.5 h-3.5 text-stone-400 group-hover:text-indigo-600"></i> LinkedIn Profile
                 </a>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-4">
@@ -355,14 +341,14 @@
               <div className="relative w-72 h-96 sm:w-80 sm:h-[420px] rounded-2xl bg-white border border-stone-200 shadow-xl overflow-hidden p-3 group">
                 <div className="absolute top-4 right-4 z-20 flex gap-2">
                   <button onClick={togglePhoto} className="p-2.5 bg-stone-900/80 hover:bg-stone-900 text-white rounded-full transition shadow-md backdrop-blur-sm cursor-pointer" title="Swap Pose Photo">
-                    <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                    <i data-lucide="refresh-cw" className="w-4 h-4"></i>
                   </button>
                 </div>
                 <div className="w-full h-full rounded-xl overflow-hidden bg-stone-100 relative">
                   {activePhoto === 'close' ? (
                     <div className="w-full h-full relative">
                       {!imageErrorClose ? (
-                        <img src="./sushree_close.jpg" alt="Sushree Sangita Panda (Portrait)" class="w-full h-full object-cover" onError={() => setImageErrorClose(true)} referrerPolicy="no-referrer" />
+                        <img src="./sushree_close.jpg" alt="Sushree Sangita Panda (Portrait)" className="w-full h-full object-cover" onError={() => setImageErrorClose(true)} />
                       ) : (
                         <div className="w-full h-full flex flex-col items-center justify-between p-6 bg-gradient-to-b from-stone-50 to-stone-200 text-stone-700">
                           <div className="w-full flex justify-between items-center">
@@ -388,7 +374,7 @@
                   ) : (
                     <div className="w-full h-full relative">
                       {!imageErrorStanding ? (
-                        <img src="./sushree_standing.jpg" alt="Sushree Sangita Panda (Standing Pose)" class="w-full h-full object-cover" onError={() => setImageErrorStanding(true)} referrerPolicy="no-referrer" />
+                        <img src="./sushree_standing.jpg" alt="Sushree Sangita Panda (Standing Pose)" className="w-full h-full object-cover" onError={() => setImageErrorStanding(true)} />
                       ) : (
                         <div className="w-full h-full flex flex-col items-center justify-between p-6 bg-gradient-to-b from-stone-50 to-purple-50 text-stone-700">
                           <div className="w-full flex justify-between items-center">
@@ -419,7 +405,7 @@
                 </div>
               </div>
               <div className="mt-4 text-[11px] text-stone-500 bg-stone-100 rounded-lg px-4 py-2 border border-stone-200 max-w-[320px] text-center">
-                <i data-lucide="layers" class="w-3.5 h-3.5 mx-auto text-indigo-500 mb-1 inline"></i> Upload photos to GitHub as <span className="font-mono font-bold text-stone-700">sushree_close.jpg</span> and <span className="font-mono font-bold text-stone-700">sushree_standing.jpg</span> in this folder to replace the illustration graphics.
+                <i data-lucide="layers" className="w-3.5 h-3.5 mx-auto text-indigo-500 mb-1 inline"></i> Place <span className="font-mono font-bold text-stone-700">sushree_close.jpg</span> and <span className="font-mono font-bold text-stone-700">sushree_standing.jpg</span> in the same folder to show portrait photos.
               </div>
             </div>
           </div>
@@ -427,7 +413,6 @@
       );
     }
 
-    // --- INTERACTIVE SIMULATOR ---
     function NetworkSimulator() {
       const [routes, setRoutes] = useState(SEED_ROUTES);
       const [selectedRoute, setSelectedRoute] = useState(SEED_ROUTES[0]);
@@ -527,7 +512,7 @@
           <div className="bg-stone-50 border-b border-stone-100 p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 mb-2">
-                <i data-lucide="globe" class="w-3 h-3 animate-spin-slow inline"></i> Interactive Telecom Lab
+                <i data-lucide="globe" className="w-3 h-3 animate-spin-slow inline"></i> Interactive Telecom Lab
               </span>
               <h3 className="text-xl font-bold text-stone-900 tracking-tight">Wholesale Route Trading Engine</h3>
               <p className="text-sm text-stone-600 mt-1">Simulate actual day-to-day operations: optimize route margins, negotiate carrier pricing, and test carrier pipelines.</p>
@@ -556,7 +541,7 @@
           <div className="grid grid-cols-1 lg:grid-cols-12">
             <div className="lg:col-span-7 p-6 border-r border-stone-200">
               <h4 className="text-sm font-semibold text-stone-800 mb-3 flex items-center gap-2">
-                <i data-lucide="cpu" class="w-4 h-4 text-indigo-500"></i> Select Carrier Hub Route
+                <i data-lucide="cpu" className="w-4 h-4 text-indigo-500"></i> Select Carrier Hub Route
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
                 {routes.map((route) => (
@@ -580,7 +565,7 @@
 
               <div className="bg-stone-50 rounded-lg p-5 border border-stone-100 mb-6">
                 <h5 className="text-xs font-semibold text-stone-700 uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                  <i data-lucide="trending-up" class="w-3.5 h-3.5 text-indigo-500 inline"></i> Procurement & Margin Maximizer
+                  <i data-lucide="trending-up" className="w-3.5 h-3.5 text-indigo-500 inline"></i> Procurement & Margin Maximizer
                 </h5>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
@@ -594,7 +579,7 @@
                   <div>
                     <p className="text-xs text-stone-500 mb-1">Unilateral vs Swap Restructuring</p>
                     <button onClick={triggerSwapAgreement} className="w-full flex items-center justify-center gap-2 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded text-xs font-semibold transition">
-                      <i data-lucide="arrow-right-left" class="w-3.5 h-3.5 inline"></i> Commit 10M swap (Boost Margin)
+                      <i data-lucide="arrow-right-left" className="w-3.5 h-3.5 inline"></i> Commit 10M swap (Boost Margin)
                     </button>
                   </div>
                 </div>
@@ -605,10 +590,10 @@
 
               <div className="flex flex-wrap gap-3">
                 <button onClick={handleRunTest} disabled={testStatus === 'routing'} className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-stone-900 hover:bg-stone-800 disabled:bg-stone-300 text-white font-semibold rounded-lg text-sm transition">
-                  <i data-lucide="play" class="w-4 h-4 inline"></i> {testStatus === 'routing' ? 'Transmitting Over SMPP...' : 'Transmit Test A2P SMS'}
+                  <i data-lucide="play" className="w-4 h-4 inline"></i> {testStatus === 'routing' ? 'Transmitting Over SMPP...' : 'Transmit Test A2P SMS'}
                 </button>
                 <button onClick={() => { setTestStatus('idle'); setLogs([]); }} className="px-4 py-3 border border-stone-300 rounded-lg hover:bg-stone-50 text-stone-600 transition" title="Clear Logs">
-                  <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                  <i data-lucide="rotate-ccw" className="w-4 h-4"></i>
                 </button>
               </div>
             </div>
@@ -651,7 +636,6 @@
       );
     }
 
-    // --- TIMELINE COMPONENT ---
     function InteractiveTimeline() {
       const [expandedIndex, setExpandedIndex] = useState(0);
       const toggleExpand = (idx) => setExpandedIndex(expandedIndex === idx ? null : idx);
@@ -666,7 +650,7 @@
                   <div className={`absolute -left-[39px] md:-left-[47px] top-1 w-6 h-6 md:w-8 md:h-8 rounded-full border-2 bg-white flex items-center justify-center transition-all ${
                     isExpanded ? 'border-indigo-600 bg-indigo-50 text-indigo-600 ring-4 ring-indigo-50' : 'border-stone-300 text-stone-500'
                   }`}>
-                    <i data-lucide="briefcase" class="w-3.5 h-3.5"></i>
+                    <i data-lucide="briefcase" className="w-3.5 h-3.5"></i>
                   </div>
 
                   <div className={`bg-white rounded-xl border p-5 md:p-6 transition-all cursor-pointer ${
@@ -679,17 +663,17 @@
                       </div>
                       <div className="flex flex-col sm:items-end text-xs text-stone-500 gap-1">
                         <span className="flex items-center gap-1 font-medium bg-stone-100 px-2 py-0.5 rounded">
-                          <i data-lucide="calendar" class="w-3 h-3 inline"></i> {exp.period}
+                          <i data-lucide="calendar" className="w-3 h-3 inline"></i> {exp.period}
                         </span>
                         <span className="flex items-center gap-1">
-                          <i data-lucide="map-pin" class="w-3 h-3 text-stone-400 inline"></i> {exp.location}
+                          <i data-lucide="map-pin" className="w-3 h-3 text-stone-400 inline"></i> {exp.location}
                         </span>
                       </div>
                     </div>
 
                     <div className="mt-4 flex items-center justify-between border-t border-stone-100 pt-3">
                       <span className="text-xs font-semibold text-indigo-600">{isExpanded ? 'Collapse Achievements' : 'Explore Core Responsibilities & Achievements'}</span>
-                      <i data-lucide={isExpanded ? "chevron-up" : "chevron-down"} class="w-4 h-4 text-stone-400"></i>
+                      <i data-lucide={isExpanded ? "chevron-up" : "chevron-down"} className="w-4 h-4 text-stone-400"></i>
                     </div>
 
                     {isExpanded && (
@@ -697,7 +681,7 @@
                         {exp.bulletPoints.map((bullet, idx) => (
                           <div key={idx} className="flex items-start gap-3 text-stone-600 text-sm leading-relaxed">
                             <span className="mt-1 flex-shrink-0 text-indigo-500">
-                              <i data-lucide="check-square" class="w-4 h-4"></i>
+                              <i data-lucide="check-square" className="w-4 h-4"></i>
                             </span>
                             <span>{bullet}</span>
                           </div>
@@ -713,7 +697,6 @@
       );
     }
 
-    // --- SKILLS GRID ---
     function CompetencyGrid() {
       const [filter, setFilter] = useState('all');
       const filtered = COMPETENCIES.filter(c => filter === 'all' || c.category === filter);
@@ -756,19 +739,18 @@
       );
     }
 
-    // --- PRINTABLE RESUME CV ---
     function PDFResume() {
       return (
         <div className="space-y-6">
           <div className="bg-stone-50 rounded-xl p-6 border border-stone-200 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4 print:hidden">
             <div className="space-y-1">
               <h3 className="text-lg font-bold text-stone-900 flex items-center gap-2">
-                <i data-lucide="file-text" class="w-5 h-5 text-indigo-600 inline"></i> Professional 1-Page CV
+                <i data-lucide="file-text" className="w-5 h-5 text-indigo-600 inline"></i> Professional 1-Page CV
               </h3>
               <p className="text-sm text-stone-600">A standard, single-page, print-optimized curriculum vitae matching the executive PDF format.</p>
             </div>
             <button onClick={() => window.print()} className="flex items-center justify-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition shadow-sm">
-              <i data-lucide="printer" class="w-4 h-4"></i> Save as PDF / Print
+              <i data-lucide="printer" className="w-4 h-4"></i> Save as PDF / Print
             </button>
           </div>
 
@@ -844,12 +826,11 @@
       );
     }
 
-    // Render App
     const root = ReactDOM.createRoot(document.getElementById('portfolio-app'));
     root.render(<PortfolioApp />);
   </script>
 
-  <!-- High-Performance Background Canvas Simulation Script -->
+  <!-- Interactive Network Canvas Animation Script -->
   <script>
     (function() {
       const canvas = document.getElementById('bg-network-canvas');
@@ -865,7 +846,6 @@
       const majorLocations = ['Malta', 'Singapore', 'India', 'Lebanon', 'London', 'Dubai', 'New York'];
       const mouse = { x: 0, y: 0, active: false };
 
-      // Initialize nodes
       for (let i = 0; i < nodeCount; i++) {
         nodes.push({
           x: Math.random() * width,
@@ -879,7 +859,6 @@
         });
       }
 
-      // Build connections
       for (let i = 0; i < nodes.length; i++) {
         const targets = nodes
           .filter(n => n.id !== nodes[i].id)
@@ -901,13 +880,11 @@
         });
       }
 
-      // Resize
       window.addEventListener('resize', () => {
         width = canvas.width = window.innerWidth;
         height = canvas.height = window.innerHeight;
       });
 
-      // Interactive Events
       window.addEventListener('mousemove', (e) => {
         mouse.x = e.clientX;
         mouse.y = e.clientY;
@@ -934,11 +911,9 @@
         });
       });
 
-      // Animation Loop
       function draw() {
         ctx.clearRect(0, 0, width, height);
 
-        // Gradient Background
         const grad = ctx.createRadialGradient(width/2, height/2, 10, width/2, height/2, Math.max(width, height));
         grad.addColorStop(0, '#fafaf9');
         grad.addColorStop(0.5, '#f5f5f4');
@@ -946,7 +921,6 @@
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, width, height);
 
-        // Ripples
         for (let i = ripples.length - 1; i >= 0; i--) {
           const r = ripples[i];
           r.radius += r.speed;
@@ -962,7 +936,6 @@
           ctx.stroke();
         }
 
-        // Move Nodes
         nodes.forEach(n => {
           n.x += n.vx;
           n.y += n.vy;
@@ -982,7 +955,6 @@
           }
         });
 
-        // Draw Connections
         connections.forEach(c => {
           const dist = Math.hypot(c.from.x - c.to.x, c.from.y - c.to.y);
           if (dist > 350) return;
@@ -1010,7 +982,6 @@
           }
         });
 
-        // Draw Nodes
         nodes.forEach(n => {
           const pulse = 1 + Math.sin(n.pulse) * 0.25;
           const rad = n.radius * pulse;
