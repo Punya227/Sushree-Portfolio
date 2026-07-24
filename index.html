@@ -169,7 +169,7 @@
 
     const SEED_ROUTES = [
       { id: "route-1", source: "India", destination: "Malta", carrier: "Ok Route Premium", rate: 0.012, margin: 18, latency: 120, volume: 45000, status: "active" },
-      { id: "route-2", id: "route-2", source: "Malta", destination: "Singapore", carrier: "ICS Global Transit", rate: 0.008, margin: 22, latency: 180, volume: 120000, status: "active" },
+      { id: "route-2", source: "Malta", destination: "Singapore", carrier: "ICS Global Transit", rate: 0.008, margin: 22, latency: 180, volume: 120000, status: "active" },
       { id: "route-3", source: "Singapore", destination: "Lebanon", carrier: "ICS Direct Routing", rate: 0.019, margin: 15, latency: 240, volume: 32000, status: "testing" },
       { id: "route-4", source: "India", destination: "Singapore", carrier: "SMS Cloud Hub Direct", rate: 0.005, margin: 12, latency: 85, volume: 250000, status: "active" },
       { id: "route-5", source: "Lebanon", destination: "Malta", carrier: "Ok Route Transit Link", rate: 0.015, margin: 20, latency: 145, volume: 18000, status: "congested" }
@@ -204,7 +204,7 @@
 
       return (
         <div className="min-h-screen flex flex-col justify-between">
-          {/* Header */}
+          <!-- Header -->
           <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 print:hidden ${
             scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-200 py-3' : 'bg-transparent py-5'
           }`}>
@@ -226,14 +226,14 @@
             </div>
           </header>
 
-          {/* Main */}
+          <!-- Main -->
           <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 space-y-24 print:pt-0 print:space-y-0">
-            {/* Hero Section */}
+            <!-- Hero Section -->
             <section id="hero-intro" className="scroll-mt-28 print:hidden">
               <HeroComponent scrollToSection={scrollToSection} />
             </section>
 
-            {/* Simulated Live Lab */}
+            <!-- Simulated Live Lab -->
             <section id="simulator-section" className="scroll-mt-28 print:hidden">
               <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
                 <div>
@@ -247,7 +247,7 @@
               <NetworkSimulator />
             </section>
 
-            {/* Experience Section */}
+            <!-- Experience Section -->
             <section id="experience-timeline-section" className="scroll-mt-28 print:hidden">
               <div className="mb-10">
                 <h2 className="text-2xl md:text-3xl font-extrabold text-stone-900 tracking-tight flex items-center gap-2">
@@ -258,7 +258,7 @@
               <InteractiveTimeline />
             </section>
 
-            {/* Skills Section */}
+            <!-- Skills Section -->
             <section id="competencies-matrix-section" className="scroll-mt-28 print:hidden">
               <div className="mb-8">
                 <h2 className="text-2xl md:text-3xl font-extrabold text-stone-900 tracking-tight flex items-center gap-2">
@@ -269,13 +269,13 @@
               <CompetencyGrid />
             </section>
 
-            {/* Printable PDF CV */}
+            <!-- Printable PDF CV -->
             <section id="pdf-resume-section" className="scroll-mt-24 print:m-0 print:p-0">
               <PDFResume />
             </section>
           </main>
 
-          {/* Footer */}
+          <!-- Footer -->
           <footer className="mt-32 border-t border-stone-200/60 bg-white/40 backdrop-blur-sm py-12 text-stone-500 text-sm relative z-10 print:hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
@@ -297,7 +297,7 @@
             </div>
           </footer>
 
-          {/* Back to Top */}
+          <!-- Back to Top -->
           {showScrollTop && (
             <button onClick={scrollToTop} className="fixed bottom-6 right-6 z-50 p-3 bg-stone-900 hover:bg-indigo-600 text-white rounded-full shadow-lg transition">
               <i data-lucide="arrow-up" class="w-4 h-4"></i>
@@ -417,7 +417,6 @@
                     </div>
                   )}
                 </div>
-              </div>
               </div>
             </div>
           </div>
