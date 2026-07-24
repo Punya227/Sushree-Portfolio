@@ -7,26 +7,15 @@
   
   <!-- Tailwind CSS Play CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          animation: {
-            'spin-slow': 'spin 12s linear infinite',
-          }
-        }
-      }
-    }
-  </script>
 
   <!-- React & ReactDOM CDN -->
   <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
   
-  <!-- Babel Compiler for JSX in the Browser -->
+  <!-- Babel Compiler for JSX -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-  <!-- Lucide Icon Library (v0.284.0) -->
+  <!-- Lucide Icon Library -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
@@ -42,7 +31,14 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* Print-specific layout optimization for the 1-Page Resume */
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .animate-spin-slow {
+      animation: spinSlow 12s linear infinite;
+    }
+
     @media print {
       body * {
         visibility: hidden !important;
@@ -65,29 +61,16 @@
 </head>
 <body class="bg-[#fafaf9] text-stone-800 antialiased selection:bg-indigo-600 selection:text-white pb-16 print:pb-0 print:bg-white">
 
-  <!-- Interactive Network Canvas (Behind Everything) -->
+  <!-- Interactive Network Canvas -->
   <canvas id="bg-network-canvas" class="fixed inset-0 pointer-events-auto z-0 select-none block"></canvas>
-
-  <!-- Creative Ambient Blurred Background Images (Uses uploaded photos) -->
-  <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none opacity-[0.25] select-none">
-    <!-- Top Left Close-up Portrait Blur -->
-    <div class="absolute top-[-10%] left-[-15%] w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] rounded-full overflow-hidden blur-[120px]">
-      <img src="./sushree_close.jpg" alt="" class="w-full h-full object-cover scale-150 rotate-12" onerror="this.style.display='none'">
-    </div>
-    <!-- Bottom Right Standing Pose Blur -->
-    <div class="absolute bottom-[-10%] right-[-15%] w-[70vw] h-[70vw] max-w-[900px] max-h-[900px] rounded-full overflow-hidden blur-[140px]">
-      <img src="./sushree_standing.jpg" alt="" class="w-full h-full object-cover scale-150 -rotate-12" onerror="this.style.display='none'">
-    </div>
-  </div>
 
   <!-- React Mounting Root -->
   <div id="portfolio-app" class="relative z-10"></div>
 
-  <!-- React Code Component using Babel -->
+  <!-- React Code Component -->
   <script type="text/babel">
-    const { useState, useEffect, useRef } = React;
+    const { useState, useEffect } = React;
 
-    // --- STATIC DATA CONFIGURATION ---
     const PERSONAL_DETAILS = {
       name: "SUSHREE SANGITA PANDA",
       title: "Senior Account Manager | International SMS & Carrier Relations",
@@ -95,7 +78,7 @@
       email: "sushreesangitapanda1999@gmail.com",
       linkedin: "linkedin.com/in/sushreesangita-panda-5b4084255",
       location: "India",
-      summary: "Results-driven Telecommunications Senior Account Manager with 3+ years of progressive experience optimizing margin and revenue across international wholesale SMS and A2P messaging. Proven track record negotiating carrier and vendor rates, managing bilateral, unilateral, and swap trade agreements, and driving new business development to consistently meet and exceed sales targets. Skilled in traffic analysis, route testing, billing and collections, and expediting new interconnections, with strong cross-functional coordination across sales, legal, and finance teams to accelerate revenue growth."
+      summary: "Results-driven Telecommunications Senior Account Manager with 3+ years of progressive experience optimizing margin and revenue across international wholesale SMS and A2P messaging. Proven track record negotiating carrier and vendor rates, managing bilateral, unilateral, and swap trade agreements, and driving new business development to consistently meet and exceed sales targets."
     };
 
     const EXPERIENCE_HISTORY = [
@@ -109,8 +92,7 @@
           "Manage and grow a portfolio of client and supplier accounts, driving international SMS wholesale route trading through buying, selling, and swap arrangements.",
           "Own end-to-end routing and procurement strategy for assigned accounts, benchmarking carrier rates to protect and improve margin performance.",
           "Spearhead new business development, negotiating and closing trade agreements with carriers and enterprise clients to expand global route coverage.",
-          "Represented the company at ITW (International Telecoms Week) Singapore, Dec 2025, strengthening carrier relationships and the global partner network.",
-          "Partner directly with the CEO on strategic account initiatives, supporting company-wide revenue and growth targets."
+          "Represented the company at ITW (International Telecoms Week) Singapore, Dec 2025, strengthening carrier relationships and the global partner network."
         ]
       },
       {
@@ -122,9 +104,7 @@
         bulletPoints: [
           "Optimized margin and revenue for the SMS business through continuous traffic analysis, consistently achieving sales targets.",
           "Negotiated costs and rates with telecom carriers, keeping client and vendor pricing current and competitive.",
-          "Conducted regular rate updates and route testing using industry-standard testing tools as part of daily operations.",
-          "Managed wholesale and retail international SMS sales, including bilateral, unilateral, and swap deal structures.",
-          "Handled billing, collections, legal agreements, and new interconnection setup, including customer credit verification."
+          "Conducted regular rate updates and route testing using industry-standard testing tools as part of daily operations."
         ]
       },
       {
@@ -135,9 +115,7 @@
         description: "Cloud-Based SMS Solutions Provider",
         bulletPoints: [
           "Drove margin and revenue growth by monitoring SMS traffic flows and closing quarterly sales targets.",
-          "Negotiated costs and pricing with telecom carriers for SMS traffic, coordinating rate updates with clients and vendors.",
-          "Managed buying and selling of wholesale and retail international SMS traffic, including bilateral, unilateral, and swap deals.",
-          "Resolved billing and collections issues in coordination with Finance; managed legal agreements and new interconnection phases."
+          "Negotiated costs and pricing with telecom carriers for SMS traffic, coordinating rate updates with clients and vendors."
         ]
       }
     ];
@@ -146,896 +124,140 @@
       { name: "Carrier & Vendor Negotiations", category: "core", description: "Negotiating rates, volumes, and terms with global telecom operators.", rating: 95 },
       { name: "Wholesale SMS/A2P Route Trading", category: "core", description: "Buying, selling, and swapping global routes to maximize SMS delivery and margin.", rating: 98 },
       { name: "Account & Client Relationship", category: "business", description: "Nurturing corporate partnerships and expanding high-value accounts globally.", rating: 92 },
-      { name: "Margin & Revenue Optimization", category: "core", description: "Analyzing trade spreads, pricing structures, and routing costs to boost profits.", rating: 96 },
-      { name: "Traffic Flow Analysis & Testing", category: "technical", description: "Monitoring live SMS queues, latency tracking, and resolving deliverability blocks.", rating: 90 },
-      { name: "Deal Structuring (Bilateral/Swap)", category: "core", description: "Crafting structured swap and bilateral agreements to ensure mutual traffic balance.", rating: 94 },
-      { name: "New Interconnection & Onboarding", category: "technical", description: "Expediting SMPP and API integrations, testing links, and launching client routes.", rating: 88 },
-      { name: "Contract & Agreement Management", category: "business", description: "Drafting, reviewing, and managing telecom inter-carrier legal frameworks.", rating: 85 }
-    ];
-
-    const ACHIEVEMENTS = [
-      { text: "Converted attendance at ITW (International Telecoms Week) Singapore, Dec 2025 into direct outreach to 35 prospective clients, resulting in 110 new business partnerships for the company.", metric: "110+ New Partners" }
-    ];
-
-    const EDUCATION = [
-      { degree: "Bachelor of Pharmacy (B.Pharm)", institution: "College of Pharmaceutical Sciences, Puri, Odisha", period: "Aug 2018 – May 2022" },
-      { degree: "C.H.S.E", institution: "U.N. Junior College of Sc. & Tech, Odisha", period: "Apr 2014 – May 2016" },
-      { degree: "B.S.E", institution: "Saindha High School, Odisha", period: "Apr 2012 – Apr 2014" }
-    ];
-
-    const CERTIFICATIONS = [
-      "Good Clinical Practice (GCP) — National Institute on Drug Abuse (NIDA)"
+      { name: "Margin & Revenue Optimization", category: "core", description: "Analyzing trade spreads, pricing structures, and routing costs to boost profits.", rating: 96 }
     ];
 
     const SEED_ROUTES = [
-      { id: "route-1", source: "India", destination: "Malta", carrier: "Ok Route Premium", rate: 0.012, margin: 18, latency: 120, volume: 45000, status: "active" },
-      { id: "route-2", source: "Malta", destination: "Singapore", carrier: "ICS Global Transit", rate: 0.008, margin: 22, latency: 180, volume: 120000, status: "active" },
-      { id: "route-3", source: "Singapore", destination: "Lebanon", carrier: "ICS Direct Routing", rate: 0.019, margin: 15, latency: 240, volume: 32000, status: "testing" },
-      { id: "route-4", source: "India", destination: "Singapore", carrier: "SMS Cloud Hub Direct", rate: 0.005, margin: 12, latency: 85, volume: 250000, status: "active" },
-      { id: "route-5", source: "Lebanon", destination: "Malta", carrier: "Ok Route Transit Link", rate: 0.015, margin: 20, latency: 145, volume: 18000, status: "congested" }
+      { id: "route-1", source: "India", destination: "Malta", carrier: "Ok Route Premium", rate: 0.012, margin: 18, latency: 120, status: "active" },
+      { id: "route-2", source: "Malta", destination: "Singapore", carrier: "ICS Global Transit", rate: 0.008, margin: 22, latency: 180, status: "active" },
+      { id: "route-3", source: "Singapore", destination: "Lebanon", carrier: "ICS Direct Routing", rate: 0.019, margin: 15, latency: 240, status: "testing" }
     ];
 
-    // --- REACT APPLICATION ENTRY POINT ---
     function PortfolioApp() {
       const [scrolled, setScrolled] = useState(false);
-      const [showScrollTop, setShowScrollTop] = useState(false);
 
       useEffect(() => {
-        const handleScroll = () => {
-          setScrolled(window.scrollY > 45);
-          setShowScrollTop(window.scrollY > 400);
-        };
+        const handleScroll = () => setScrolled(window.scrollY > 45);
         window.addEventListener('scroll', handleScroll);
-        // Trigger lucide icons initialization
-        setTimeout(() => {
-          if (window.lucide) window.lucide.createIcons();
-        }, 300);
         return () => window.removeEventListener('scroll', handleScroll);
       }, []);
 
-      const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      };
-
-      const scrollToSection = (id) => {
+      const scrollTo = (id) => {
         const el = document.getElementById(id);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
       };
 
       return (
         <div className="min-h-screen flex flex-col justify-between">
-          <!-- Header -->
-          <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 print:hidden ${
-            scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-200 py-3' : 'bg-transparent py-5'
-          }`}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-              <div onClick={scrollToTop} className="flex items-center gap-2 cursor-pointer">
-                <div className="w-8 h-8 rounded-lg bg-stone-900 flex items-center justify-center text-white font-bold text-sm tracking-wider hover:bg-indigo-600 transition">S</div>
-                <span className="font-extrabold text-stone-900 tracking-tight text-sm sm:text-base uppercase">Sushree <span className="text-indigo-600 font-normal">Panda</span></span>
+          <header className={`fixed top-0 inset-x-0 z-50 transition-all ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm border-b py-3' : 'bg-transparent py-5'}`}>
+            <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
+              <div className="flex items-center gap-2 font-bold uppercase text-stone-900">
+                <span className="w-8 h-8 rounded bg-stone-900 text-white flex items-center justify-center text-sm">S</span>
+                <span>Sushree <span className="text-indigo-600 font-normal">Panda</span></span>
               </div>
-              <nav className="hidden md:flex items-center gap-2">
-                <button onClick={() => scrollToSection('hero-intro')} className="px-3.5 py-1.5 text-xs font-semibold text-stone-600 hover:text-indigo-600 transition">Overview</button>
-                <button onClick={() => scrollToSection('simulator-section')} className="px-3.5 py-1.5 text-xs font-semibold text-stone-600 hover:text-indigo-600 transition">SMS Simulator</button>
-                <button onClick={() => scrollToSection('experience-timeline-section')} className="px-3.5 py-1.5 text-xs font-semibold text-stone-600 hover:text-indigo-600 transition">Experience</button>
-                <button onClick={() => scrollToSection('competencies-matrix-section')} className="px-3.5 py-1.5 text-xs font-semibold text-stone-600 hover:text-indigo-600 transition">Skills</button>
-                <button onClick={() => scrollToSection('pdf-resume-section')} className="px-4 py-2 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition shadow-sm">Official CV PDF</button>
+              <nav className="flex gap-4 text-xs font-semibold text-stone-600">
+                <button onClick={() => scrollTo('hero')}>Overview</button>
+                <button onClick={() => scrollTo('simulator')}>SMS Lab</button>
+                <button onClick={() => scrollTo('experience')}>Experience</button>
+                <button onClick={() => scrollTo('cv')} className="bg-indigo-600 text-white px-3 py-1.5 rounded">PDF CV</button>
               </nav>
-              <div className="md:hidden">
-                <button onClick={() => scrollToSection('pdf-resume-section')} className="px-3.5 py-1.5 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition">Resume PDF</button>
-              </div>
             </div>
           </header>
 
-          <!-- Main -->
-          <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 space-y-24 print:pt-0 print:space-y-0">
-            <!-- Hero Section -->
-            <section id="hero-intro" className="scroll-mt-28 print:hidden">
-              <HeroComponent scrollToSection={scrollToSection} />
+          <main className="max-w-7xl mx-auto px-4 pt-28 space-y-20">
+            <section id="hero" className="py-12">
+              <h1 className="text-4xl md:text-6xl font-extrabold text-stone-900">{PERSONAL_DETAILS.name}</h1>
+              <p className="text-lg font-bold text-indigo-600 mt-2">{PERSONAL_DETAILS.title}</p>
+              <p className="text-stone-600 mt-4 max-w-2xl">{PERSONAL_DETAILS.summary}</p>
             </section>
 
-            <!-- Simulated Live Lab -->
-            <section id="simulator-section" className="scroll-mt-28 print:hidden">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-                <div>
-                  <h2 className="text-2xl md:text-3xl font-extrabold text-stone-900 tracking-tight">Interactive Carrier Trading</h2>
-                  <p className="text-sm text-stone-600 mt-1">An executive telecom playground demonstrating her specialized industry expertise.</p>
-                </div>
-                <div className="flex items-center gap-2 text-xs font-mono bg-stone-100 text-stone-600 px-3 py-1 rounded border border-stone-200">
-                  <i data-lucide="terminal" class="w-3.5 h-3.5"></i> SIMULATION ENGINE ACTIVE
-                </div>
+            <section id="simulator" className="bg-white p-6 rounded-xl border border-stone-200 shadow-sm">
+              <h2 className="text-2xl font-bold text-stone-900">Interactive Carrier Trading Engine</h2>
+              <p className="text-sm text-stone-500 mb-6">Select routes and test SMPP deliverability live.</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {SEED_ROUTES.map(r => (
+                  <div key={r.id} className="p-4 rounded-lg border border-stone-200 bg-stone-50">
+                    <p className="font-bold text-stone-800">{r.source} ➔ {r.destination}</p>
+                    <p className="text-xs text-stone-500 mt-1">Carrier: {r.carrier}</p>
+                    <p className="text-xs font-mono text-indigo-600 mt-2 font-bold">Rate: ${r.rate} | Margin: {r.margin}%</p>
+                  </div>
+                ))}
               </div>
-              <NetworkSimulator />
             </section>
 
-            <!-- Experience Section -->
-            <section id="experience-timeline-section" className="scroll-mt-28 print:hidden">
-              <div className="mb-10">
-                <h2 className="text-2xl md:text-3xl font-extrabold text-stone-900 tracking-tight flex items-center gap-2">
-                  <i data-lucide="briefcase" class="text-indigo-600 w-6 h-6"></i> Professional Track Record
-                </h2>
-                <p className="text-sm text-stone-600 mt-1">3+ years driving margin expansions and vendor deals at leading telecom providers.</p>
+            <section id="experience" className="space-y-6">
+              <h2 className="text-2xl font-bold text-stone-900">Professional History</h2>
+              <div className="space-y-4">
+                {EXPERIENCE_HISTORY.map((e, idx) => (
+                  <div key={idx} className="bg-white p-6 rounded-xl border border-stone-200">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h3 className="font-bold text-lg text-stone-900">{e.role}</h3>
+                        <p className="text-sm text-indigo-600 font-semibold">{e.company} - {e.location}</p>
+                      </div>
+                      <span className="text-xs text-stone-500 bg-stone-100 px-2 py-1 rounded">{e.period}</span>
+                    </div>
+                    <ul className="list-disc pl-5 text-sm text-stone-600 mt-4 space-y-1">
+                      {e.bulletPoints.map((bp, bIdx) => <li key={bIdx}>{bp}</li>)}
+                    </ul>
+                  </div>
+                ))}
               </div>
-              <InteractiveTimeline />
             </section>
 
-            <!-- Skills Section -->
-            <section id="competencies-matrix-section" className="scroll-mt-28 print:hidden">
-              <div className="mb-8">
-                <h2 className="text-2xl md:text-3xl font-extrabold text-stone-900 tracking-tight flex items-center gap-2">
-                  <i data-lucide="award" class="text-indigo-600 w-6 h-6"></i> Executive Competencies
-                </h2>
-                <p className="text-sm text-stone-600 mt-1">Refined strategic abilities crossing technical telecom operations, wholesale pricing, and executive management.</p>
+            <section id="cv" className="bg-white p-8 rounded-xl border border-stone-200 shadow-md">
+              <div className="flex justify-between items-center pb-4 border-b">
+                <h2 className="text-xl font-bold text-stone-900">Official Curriculum Vitae</h2>
+                <button onClick={() => window.print()} className="bg-stone-900 text-white px-4 py-2 rounded text-xs font-semibold">Print / PDF</button>
               </div>
-              <CompetencyGrid />
-            </section>
-
-            <!-- Printable PDF CV -->
-            <section id="pdf-resume-section" className="scroll-mt-24 print:m-0 print:p-0">
-              <PDFResume />
+              <div className="mt-6 text-sm text-stone-800 space-y-4">
+                <p><strong>Email:</strong> {PERSONAL_DETAILS.email} | <strong>Phone:</strong> {PERSONAL_DETAILS.phone}</p>
+                <p>{PERSONAL_DETAILS.summary}</p>
+              </div>
             </section>
           </main>
 
-          <!-- Footer -->
-          <footer className="mt-32 border-t border-stone-200/60 bg-white/40 backdrop-blur-sm py-12 text-stone-500 text-sm relative z-10 print:hidden">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
-                <div>
-                  <p className="font-extrabold text-stone-800 uppercase tracking-wider text-xs">SUSHREE SANGITA PANDA</p>
-                  <p className="text-xs text-stone-500 mt-1">Senior Account Manager | International SMS & Carrier Relations</p>
-                </div>
-                <div className="flex gap-4 text-xs font-semibold">
-                  <a href="mailto:sushreesangitapanda1999@gmail.com" className="hover:text-indigo-600 transition">Email</a>
-                  <span>•</span>
-                  <a href="https://linkedin.com/in/sushreesangita-panda-5b4084255" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 transition">LinkedIn</a>
-                  <span>•</span>
-                  <button onClick={scrollToTop} className="hover:text-indigo-600 transition">Back to Top</button>
-                </div>
-                <div className="text-xs text-stone-400 font-mono">
-                  &copy; {new Date().getFullYear()} Sushree Sangita Panda. All rights reserved.
-                </div>
-              </div>
-            </div>
+          <footer className="text-center py-8 text-xs text-stone-400 mt-20 border-t">
+            &copy; {new Date().getFullYear()} Sushree Sangita Panda
           </footer>
-
-          <!-- Back to Top -->
-          {showScrollTop && (
-            <button onClick={scrollToTop} className="fixed bottom-6 right-6 z-50 p-3 bg-stone-900 hover:bg-indigo-600 text-white rounded-full shadow-lg transition">
-              <i data-lucide="arrow-up" class="w-4 h-4"></i>
-            </button>
-          )}
         </div>
       );
     }
 
-    // --- HERO COMPONENT ---
-    function HeroComponent({ scrollToSection }) {
-      const [activePhoto, setActivePhoto] = useState('close');
-      const [imageErrorClose, setImageErrorClose] = useState(false);
-      const [imageErrorStanding, setImageErrorStanding] = useState(false);
-
-      const togglePhoto = () => setActivePhoto(activePhoto === 'close' ? 'standing' : 'close');
-
-      return (
-        <div className="relative py-12 md:py-20 lg:py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-stone-100 text-stone-800 border border-stone-200">
-                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-indigo-600"></i> Executive Telecom Portfolio
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-stone-900 leading-[1.1]">
-                Sushree Sangita <span className="text-indigo-600">Panda</span>
-              </h1>
-              <p className="text-lg md:text-xl font-bold text-stone-700 tracking-wide font-sans uppercase">
-                {PERSONAL_DETAILS.title}
-              </p>
-              <p className="text-sm md:text-base text-stone-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                Results-driven Telecommunications leader with 3+ years of experience optimizing routing, trading SMS wholesale corridors, and managing high-yield carrier networks across Europe, Middle East, and Asia.
-              </p>
-              <div className="flex flex-wrap justify-center lg:justify-start gap-3 text-xs font-medium text-stone-700">
-                <span className="flex items-center gap-1.5 bg-white border border-stone-200 px-3 py-1.5 rounded-full shadow-sm">
-                  <i data-lucide="mail" class="w-3.5 h-3.5 text-stone-400"></i> sushreesangitapanda1999@gmail.com
-                </span>
-                <span className="flex items-center gap-1.5 bg-white border border-stone-200 px-3 py-1.5 rounded-full shadow-sm">
-                  <i data-lucide="phone" class="w-3.5 h-3.5 text-stone-400"></i> +91 6371069149
-                </span>
-                <span className="flex items-center gap-1.5 bg-white border border-stone-200 px-3 py-1.5 rounded-full shadow-sm">
-                  <i data-lucide="map-pin" class="w-3.5 h-3.5 text-stone-400"></i> India
-                </span>
-                <a href="https://linkedin.com/in/sushreesangita-panda-5b4084255" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 bg-white border border-stone-200 hover:border-indigo-300 px-3 py-1.5 rounded-full shadow-sm transition group">
-                  <i data-lucide="linkedin" class="w-3.5 h-3.5 text-stone-400 group-hover:text-indigo-600"></i> LinkedIn Profile
-                </a>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-4">
-                <button onClick={() => scrollToSection('pdf-resume-section')} className="px-6 py-3 bg-stone-900 hover:bg-stone-800 text-white font-semibold rounded-lg text-sm transition shadow-sm">Download PDF Resume</button>
-                <button onClick={() => scrollToSection('simulator-section')} className="px-6 py-3 border border-stone-300 hover:border-indigo-300 hover:bg-indigo-50/25 text-stone-700 hover:text-indigo-900 font-semibold rounded-lg text-sm transition">Test SMS Route Lab</button>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5 flex flex-col items-center">
-              <div className="relative w-72 h-96 sm:w-80 sm:h-[420px] rounded-2xl bg-white border border-stone-200 shadow-xl overflow-hidden p-3 group">
-                <div className="absolute top-4 right-4 z-20 flex gap-2">
-                  <button onClick={togglePhoto} className="p-2.5 bg-stone-900/80 hover:bg-stone-900 text-white rounded-full transition shadow-md backdrop-blur-sm cursor-pointer" title="Swap Pose Photo">
-                    <i data-lucide="refresh-cw" class="w-4 h-4"></i>
-                  </button>
-                </div>
-                <div className="w-full h-full rounded-xl overflow-hidden bg-stone-100 relative">
-                  {activePhoto === 'close' ? (
-                    <div className="w-full h-full relative">
-                      {!imageErrorClose ? (
-                        <img src="./sushree_close.jpg" alt="Sushree Sangita Panda (Portrait)" class="w-full h-full object-cover" onError={() => setImageErrorClose(true)} referrerPolicy="no-referrer" />
-                      ) : (
-                        <div className="w-full h-full flex flex-col items-center justify-between p-6 bg-gradient-to-b from-stone-50 to-stone-200 text-stone-700">
-                          <div className="w-full flex justify-between items-center">
-                            <span className="text-[10px] font-semibold text-stone-400 font-mono">POSE_A: PORTRAIT</span>
-                            <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-                          </div>
-                          <div className="relative w-44 h-44 flex items-center justify-center">
-                            <div className="absolute top-4 w-28 h-40 bg-stone-900 rounded-b-full opacity-90 blur-[1px]" />
-                            <div className="absolute top-8 w-20 h-24 bg-amber-100/90 rounded-full border border-amber-200/50" />
-                            <div className="absolute bottom-12 flex justify-between w-24">
-                              <div className="w-5 h-12 bg-amber-100/90 rounded-t-full rotate-12 border-t border-r border-amber-200/50" />
-                              <div className="w-5 h-12 bg-amber-100/90 rounded-t-full -rotate-12 border-t border-l border-amber-200/50" />
-                            </div>
-                            <div className="absolute bottom-0 w-28 h-10 bg-stone-900 rounded-t-lg" />
-                          </div>
-                          <div className="text-center">
-                            <p className="text-sm font-bold text-stone-800">Close-up Portrait View</p>
-                            <p className="text-[10px] text-stone-500 mt-1 max-w-[200px] mx-auto leading-relaxed">Click swap icon in top right to see her standing professional pose.</p>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <div className="w-full h-full relative">
-                      {!imageErrorStanding ? (
-                        <img src="./sushree_standing.jpg" alt="Sushree Sangita Panda (Standing Pose)" class="w-full h-full object-cover" onError={() => setImageErrorStanding(true)} referrerPolicy="no-referrer" />
-                      ) : (
-                        <div className="w-full h-full flex flex-col items-center justify-between p-6 bg-gradient-to-b from-stone-50 to-purple-50 text-stone-700">
-                          <div className="w-full flex justify-between items-center">
-                            <span className="text-[10px] font-semibold text-purple-400 font-mono">POSE_B: LEANING_VEST</span>
-                            <span className="w-2 h-2 rounded-full bg-purple-500"></span>
-                          </div>
-                          <div className="relative w-44 h-48 flex items-center justify-center">
-                            <div className="absolute right-8 w-0.5 h-full bg-purple-100" />
-                            <div className="absolute top-4 w-16 h-22 bg-stone-900 rounded-b-full opacity-90" />
-                            <div className="absolute top-6 w-12 h-14 bg-amber-100/90 rounded-full" />
-                            <div className="absolute top-10 left-12 w-2 h-2 rounded-full border border-yellow-500 bg-transparent" />
-                            <div className="absolute top-10 right-12 w-2 h-2 rounded-full border border-yellow-500 bg-transparent" />
-                            <div className="absolute bottom-4 w-20 h-28 bg-purple-200 rounded-t-lg border border-purple-300" />
-                            <div className="absolute top-[80px] w-8 h-2 rounded-full border-b border-yellow-500 bg-transparent" />
-                            <div className="absolute bottom-4 flex justify-between w-20 px-1">
-                              <div className="w-5 h-22 bg-purple-600 rounded-bl-lg" />
-                              <div className="w-5 h-22 bg-purple-600 rounded-br-lg" />
-                            </div>
-                          </div>
-                          <div className="text-center">
-                            <p className="text-sm font-bold text-purple-900">Professional Leaning Pose</p>
-                            <p className="text-[10px] text-stone-500 mt-1 max-w-[200px] mx-auto leading-relaxed">Styled after her business formal purple attire leaning pose.</p>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      );
-    }
-
-    // --- INTERACTIVE SIMULATOR ---
-    function NetworkSimulator() {
-      const [routes, setRoutes] = useState(SEED_ROUTES);
-      const [selectedRoute, setSelectedRoute] = useState(SEED_ROUTES[0]);
-      const [testStatus, setTestStatus] = useState('idle');
-      const [logs, setLogs] = useState([]);
-      const [trafficCounter, setTrafficCounter] = useState(148293);
-      const [totalRevenue, setTotalRevenue] = useState(2572.45);
-      const [successRate, setSuccessRate] = useState(99.4);
-      const [interconnectedCarriers, setInterconnectedCarriers] = useState(110);
-
-      useEffect(() => {
-        const interval = setInterval(() => {
-          const chunk = Math.floor(Math.random() * 8) + 2;
-          setTrafficCounter(prev => prev + chunk);
-          setTotalRevenue(prev => prev + chunk * selectedRoute.rate * (selectedRoute.margin / 100));
-        }, 2500);
-        return () => clearInterval(interval);
-      }, [selectedRoute]);
-
-      const handleRunTest = () => {
-        if (testStatus === 'routing') return;
-        setTestStatus('routing');
-        setLogs([]);
-
-        const steps = [
-          `Initializing A2P Bind connection over SMPP v3.4 to ${selectedRoute.carrier}...`,
-          `Testing path: ${selectedRoute.source} ➔ ${selectedRoute.destination}`,
-          `Benchmarking wholesale rate at $${selectedRoute.rate.toFixed(4)} per message...`,
-          `Analyzing route latency... current: ${selectedRoute.latency}ms`,
-          `Applying automated route optimization logic...`,
-        ];
-
-        steps.forEach((step, index) => {
-          setTimeout(() => {
-            setLogs(prev => [...prev, step]);
-          }, (index + 1) * 400);
-        });
-
-        setTimeout(() => {
-          if (selectedRoute.status === 'congested') {
-            setTestStatus('failed');
-            setLogs(prev => [
-              ...prev,
-              `CRITICAL WARNING: Latency exceeds threshold. High delivery drop probability.`,
-              `SMPP Error [0x0000000b] (Queue Congestion at ${selectedRoute.destination} gateway).`,
-              `TEST COMPLETED: Route failed quality parameters.`
-            ]);
-            setSuccessRate(prev => Math.max(94.2, +(prev - 0.2).toFixed(1)));
-          } else {
-            setTestStatus('success');
-            setLogs(prev => [
-              ...prev,
-              `DLR (Delivery Receipt) received from foreign network in ${selectedRoute.latency}ms.`,
-              `SS7 Gateway handshake completed successfully.`,
-              `SUCCESS: Route validated at ${selectedRoute.margin}% margin trading yield.`
-            ]);
-            setSuccessRate(prev => Math.min(99.9, +(prev + 0.1).toFixed(1)));
-          }
-        }, 2500);
-      };
-
-      const adjustRate = (delta) => {
-        const newRoutes = routes.map((r) => {
-          if (r.id === selectedRoute.id) {
-            const newRate = Math.max(0.001, +(r.rate + delta).toFixed(4));
-            const newMargin = Math.max(5, Math.min(45, Math.round(r.margin + (delta < 0 ? 1.5 : -1.5))));
-            const updated = { ...r, rate: newRate, margin: newMargin };
-            setSelectedRoute(updated);
-            return updated;
-          }
-          return r;
-        });
-        setRoutes(newRoutes);
-      };
-
-      const triggerSwapAgreement = () => {
-        setLogs(prev => [
-          ...prev,
-          `Initiating Bilateral Swap Negotiations for ${selectedRoute.destination} wholesale lines...`,
-          `Exchanging traffic volume commitment: 10,000,000 monthly SMS.`,
-          `Secured Swap Deal: Net rate restructured. Margin increased by +6%!`,
-        ]);
-        const newRoutes = routes.map((r) => {
-          if (r.id === selectedRoute.id) {
-            const updated = { ...r, margin: Math.min(40, r.margin + 6), status: 'active' };
-            setSelectedRoute(updated);
-            return updated;
-          }
-          return r;
-        });
-        setRoutes(newRoutes);
-        setInterconnectedCarriers(prev => prev + 1);
-      };
-
-      return (
-        <div className="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden relative">
-          <div className="bg-stone-50 border-b border-stone-100 p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 mb-2">
-                <i data-lucide="globe" class="w-3 h-3 animate-spin-slow inline"></i> Interactive Telecom Lab
-              </span>
-              <h3 className="text-xl font-bold text-stone-900 tracking-tight">Wholesale Route Trading Engine</h3>
-              <p className="text-sm text-stone-600 mt-1">Simulate actual day-to-day operations: optimize route margins, negotiate carrier pricing, and test carrier pipelines.</p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 border-b border-stone-200 bg-stone-50/50">
-            <div className="p-4 border-r border-stone-100">
-              <p className="text-xs font-medium text-stone-500 uppercase tracking-wider">SMS Sim Volume</p>
-              <p className="text-lg font-bold text-stone-800 mt-1">{trafficCounter.toLocaleString()}</p>
-            </div>
-            <div className="p-4 border-r border-stone-100">
-              <p className="text-xs font-medium text-stone-500 uppercase tracking-wider">Bilateral Margin Yield</p>
-              <p className="text-lg font-bold text-indigo-600 mt-1">${totalRevenue.toFixed(2)}</p>
-            </div>
-            <div className="p-4 border-r border-stone-100">
-              <p className="text-xs font-medium text-stone-500 uppercase tracking-wider">Delivery SLA Rate</p>
-              <p className="text-lg font-bold text-emerald-600 mt-1">{successRate}%</p>
-            </div>
-            <div className="p-4">
-              <p className="text-xs font-medium text-stone-500 uppercase tracking-wider">Carrier Connections</p>
-              <p className="text-lg font-bold text-stone-800 mt-1">{interconnectedCarriers}</p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12">
-            <div className="lg:col-span-7 p-6 border-r border-stone-200">
-              <h4 className="text-sm font-semibold text-stone-800 mb-3 flex items-center gap-2">
-                <i data-lucide="cpu" class="w-4 h-4 text-indigo-500"></i> Select Carrier Hub Route
-              </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                {routes.map((route) => (
-                  <button key={route.id} onClick={() => { setSelectedRoute(route); setTestStatus('idle'); setLogs([]); }} className={`text-left p-4 rounded-lg border transition-all relative ${
-                    selectedRoute.id === route.id ? 'border-indigo-600 bg-indigo-50/20 ring-1 ring-indigo-600' : 'border-stone-200 hover:border-stone-300 hover:bg-stone-50'
-                  }`}>
-                    <div className="flex justify-between items-start">
-                      <span className="font-semibold text-stone-800 text-sm">{route.source} ➔ {route.destination}</span>
-                      <span className={`inline-block w-2.5 h-2.5 rounded-full ${route.status === 'active' ? 'bg-emerald-500' : route.status === 'congested' ? 'bg-amber-500' : 'bg-blue-500'}`} />
-                    </div>
-                    <div className="mt-2 text-xs text-stone-500 space-y-1">
-                      <p>Carrier: {route.carrier}</p>
-                      <div className="flex justify-between font-mono">
-                        <span>Cost: ${route.rate.toFixed(4)}</span>
-                        <span className="text-indigo-600 font-bold">Margin: {route.margin}%</span>
-                      </div>
-                    </div>
-                  </button>
-                ))}
-              </div>
-
-              <div className="bg-stone-50 rounded-lg p-5 border border-stone-100 mb-6">
-                <h5 className="text-xs font-semibold text-stone-700 uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                  <i data-lucide="trending-up" class="w-3.5 h-3.5 text-indigo-500 inline"></i> Procurement & Margin Maximizer
-                </h5>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-xs text-stone-500 mb-1">Negotiate Supplier Rate</p>
-                    <div className="flex items-center gap-2">
-                      <button onClick={() => adjustRate(-0.0005)} className="px-2.5 py-1 text-xs border border-stone-300 rounded bg-white hover:bg-stone-100 font-semibold text-stone-700">- $0.0005</button>
-                      <span className="font-mono text-sm font-bold text-stone-800">${selectedRoute.rate.toFixed(4)}</span>
-                      <button onClick={() => adjustRate(0.0005)} className="px-2.5 py-1 text-xs border border-stone-300 rounded bg-white hover:bg-stone-100 font-semibold text-stone-700">+ $0.0005</button>
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-xs text-stone-500 mb-1">Unilateral vs Swap Restructuring</p>
-                    <button onClick={triggerSwapAgreement} className="w-full flex items-center justify-center gap-2 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded text-xs font-semibold transition">
-                      <i data-lucide="arrow-right-left" class="w-3.5 h-3.5 inline"></i> Commit 10M swap (Boost Margin)
-                    </button>
-                  </div>
-                </div>
-                <p className="text-[11px] text-stone-500 mt-3 leading-relaxed">
-                  *Pro-tip: Lowering buying costs through swap trade commitments boosts the margin yield (current: <span className="font-bold text-indigo-600">{selectedRoute.margin}%</span>) without increasing final cost to client.
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-3">
-                <button onClick={handleRunTest} disabled={testStatus === 'routing'} className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-stone-900 hover:bg-stone-800 disabled:bg-stone-300 text-white font-semibold rounded-lg text-sm transition">
-                  <i data-lucide="play" class="w-4 h-4 inline"></i> {testStatus === 'routing' ? 'Transmitting Over SMPP...' : 'Transmit Test A2P SMS'}
-                </button>
-                <button onClick={() => { setTestStatus('idle'); setLogs([]); }} className="px-4 py-3 border border-stone-300 rounded-lg hover:bg-stone-50 text-stone-600 transition" title="Clear Logs">
-                  <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
-                </button>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5 p-6 bg-stone-900 text-stone-300 flex flex-col justify-between min-h-[350px]">
-              <div>
-                <div className="flex justify-between items-center pb-3 border-b border-stone-800 mb-4">
-                  <span className="text-xs font-bold uppercase tracking-wider text-stone-500">SMPP Test Console</span>
-                  <div className="flex gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
-                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
-                    <span className="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
-                  </div>
-                </div>
-                <div className="font-mono text-xs space-y-2 select-text">
-                  <p className="text-stone-500">// Terminal connection live</p>
-                  <p className="text-stone-500">// Waiting for packet transmission...</p>
-                  {logs.map((log, index) => {
-                    let color = 'text-stone-300';
-                    if (log.startsWith('SUCCESS') || log.startsWith('DLR')) color = 'text-emerald-400 font-bold';
-                    if (log.startsWith('CRITICAL') || log.startsWith('SMPP Error')) color = 'text-amber-400';
-                    if (log.startsWith('TEST COMPLETED')) color = 'text-red-400 font-bold';
-                    return <p key={index} className={`${color}`}>❯ {log}</p>;
-                  })}
-                  {testStatus === 'routing' && (
-                    <div className="flex items-center gap-2 text-indigo-400 mt-2 font-semibold">
-                      <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-ping"></span>
-                      <span>Routing packets globally...</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="mt-6 pt-4 border-t border-stone-800 flex items-center justify-between text-xs text-stone-500">
-                <span>Gateway: ss7.okroute.carrier</span>
-                <span>Status: {testStatus.toUpperCase()}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      );
-    }
-
-    // --- TIMELINE COMPONENT ---
-    function InteractiveTimeline() {
-      const [expandedIndex, setExpandedIndex] = useState(0);
-      const toggleExpand = (idx) => setExpandedIndex(expandedIndex === idx ? null : idx);
-
-      return (
-        <div className="space-y-6">
-          <div className="relative border-l-2 border-stone-300 ml-4 md:ml-6 pl-6 md:pl-8 space-y-12">
-            {EXPERIENCE_HISTORY.map((exp, index) => {
-              const isExpanded = expandedIndex === index;
-              return (
-                <div key={index} className="relative group">
-                  <div className={`absolute -left-[39px] md:-left-[47px] top-1 w-6 h-6 md:w-8 md:h-8 rounded-full border-2 bg-white flex items-center justify-center transition-all ${
-                    isExpanded ? 'border-indigo-600 bg-indigo-50 text-indigo-600 ring-4 ring-indigo-50' : 'border-stone-300 text-stone-500'
-                  }`}>
-                    <i data-lucide="briefcase" class="w-3.5 h-3.5"></i>
-                  </div>
-
-                  <div className={`bg-white rounded-xl border p-5 md:p-6 transition-all cursor-pointer ${
-                    isExpanded ? 'border-indigo-200 shadow-md ring-1 ring-indigo-50 bg-stone-50/20' : 'border-stone-200 hover:border-stone-300'
-                  }`} onClick={() => toggleExpand(index)}>
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                      <div>
-                        <h3 className="text-base md:text-lg font-bold text-stone-900 group-hover:text-indigo-600 transition-colors">{exp.role}</h3>
-                        <p className="text-sm font-semibold text-stone-700 mt-0.5">{exp.company} <span className="text-stone-400 font-normal">| {exp.description}</span></p>
-                      </div>
-                      <div className="flex flex-col sm:items-end text-xs text-stone-500 gap-1">
-                        <span className="flex items-center gap-1 font-medium bg-stone-100 px-2 py-0.5 rounded">
-                          <i data-lucide="calendar" class="w-3 h-3 inline"></i> {exp.period}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <i data-lucide="map-pin" class="w-3 h-3 text-stone-400 inline"></i> {exp.location}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="mt-4 flex items-center justify-between border-t border-stone-100 pt-3">
-                      <span className="text-xs font-semibold text-indigo-600">{isExpanded ? 'Collapse Achievements' : 'Explore Core Responsibilities & Achievements'}</span>
-                      <i data-lucide={isExpanded ? "chevron-up" : "chevron-down"} class="w-4 h-4 text-stone-400"></i>
-                    </div>
-
-                    {isExpanded && (
-                      <div className="mt-4 pt-4 border-t border-stone-100 space-y-3.5 pl-1">
-                        {exp.bulletPoints.map((bullet, idx) => (
-                          <div key={idx} className="flex items-start gap-3 text-stone-600 text-sm leading-relaxed">
-                            <span className="mt-1 flex-shrink-0 text-indigo-500">
-                              <i data-lucide="check-square" class="w-4 h-4"></i>
-                            </span>
-                            <span>{bullet}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      );
-    }
-
-    // --- SKILLS GRID ---
-    function CompetencyGrid() {
-      const [filter, setFilter] = useState('all');
-      const filtered = COMPETENCIES.filter(c => filter === 'all' || c.category === filter);
-
-      return (
-        <div className="space-y-6">
-          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-stone-200 pb-4">
-            <div className="flex flex-wrap items-center gap-2">
-              {['all', 'core', 'technical', 'business'].map(cat => (
-                <button key={cat} onClick={() => setFilter(cat)} className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide capitalize transition-all ${
-                  filter === cat ? 'bg-stone-900 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
-                }`}>{cat === 'all' ? 'All Competencies' : cat + ' Operations'}</button>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {filtered.map((comp) => (
-              <div key={comp.name} className="bg-white rounded-xl p-5 border border-stone-200 shadow-sm flex flex-col justify-between hover:border-stone-300 transition-all group">
-                <div>
-                  <div className="flex justify-between items-start gap-2">
-                    <h4 className="text-sm font-bold text-stone-900 group-hover:text-indigo-600 transition-colors">{comp.name}</h4>
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-stone-100 text-stone-700">{comp.category}</span>
-                  </div>
-                  <p className="text-xs text-stone-600 mt-2 leading-relaxed">{comp.description}</p>
-                </div>
-                <div className="mt-4 pt-3 border-t border-stone-50">
-                  <div className="flex justify-between items-center text-xs font-mono mb-1.5">
-                    <span className="text-stone-400">Expertise Level</span>
-                    <span className="font-bold text-stone-800">{comp.rating}%</span>
-                  </div>
-                  <div className="w-full bg-stone-100 h-1.5 rounded-full overflow-hidden">
-                    <div style={{ width: `${comp.rating}%` }} className="h-full bg-indigo-600 rounded-full transition-all duration-1000" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    // --- PRINTABLE RESUME CV ---
-    function PDFResume() {
-      return (
-        <div className="space-y-6">
-          <div className="bg-stone-50 rounded-xl p-6 border border-stone-200 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4 print:hidden">
-            <div className="space-y-1">
-              <h3 className="text-lg font-bold text-stone-900 flex items-center gap-2">
-                <i data-lucide="file-text" class="w-5 h-5 text-indigo-600 inline"></i> Professional 1-Page CV
-              </h3>
-              <p className="text-sm text-stone-600">A standard, single-page, print-optimized curriculum vitae matching the executive PDF format.</p>
-            </div>
-            <button onClick={() => window.print()} className="flex items-center justify-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition shadow-sm">
-              <i data-lucide="printer" class="w-4 h-4"></i> Save as PDF / Print
-            </button>
-          </div>
-
-          <div id="printable-cv-document" className="bg-white rounded-xl border border-stone-200 shadow-md p-8 md:p-12 mx-auto max-w-[850px] font-serif text-stone-900 relative print:border-0 print:shadow-none print:p-0 print:m-0 print:max-w-none">
-            <div className="absolute top-4 right-4 text-[10px] font-sans text-stone-400 border border-stone-200 rounded px-2 py-0.5 print:hidden uppercase tracking-wider">Official PDF Layout</div>
-            <div className="border-b-2 border-stone-800 pb-5 text-center md:text-left">
-              <h1 className="text-3xl font-extrabold tracking-tight text-stone-900 uppercase font-sans">{PERSONAL_DETAILS.name}</h1>
-              <p className="text-sm font-semibold text-stone-700 mt-1 font-sans tracking-wide uppercase">{PERSONAL_DETAILS.title}</p>
-              <div className="flex flex-wrap justify-center md:justify-start gap-y-1 gap-x-4 mt-3 text-xs font-sans text-stone-600">
-                <span>{PERSONAL_DETAILS.phone}</span> • <span>{PERSONAL_DETAILS.email}</span> • <span>{PERSONAL_DETAILS.linkedin}</span> • <span>{PERSONAL_DETAILS.location}</span>
-              </div>
-            </div>
-
-            <div className="mt-5 space-y-2">
-              <h2 className="text-sm font-extrabold tracking-wider text-stone-800 uppercase font-sans border-b border-stone-200 pb-1">Professional Summary</h2>
-              <p className="text-sm leading-relaxed text-stone-800 text-justify font-sans">{PERSONAL_DETAILS.summary}</p>
-            </div>
-
-            <div className="mt-5 space-y-2">
-              <h2 className="text-sm font-extrabold tracking-wider text-stone-800 uppercase font-sans border-b border-stone-200 pb-1">Core Competencies</h2>
-              <div className="text-sm text-stone-800 leading-relaxed font-sans flex flex-wrap gap-x-2 gap-y-1">
-                {COMPETENCIES.map((comp, idx) => (
-                  <span key={comp.name}>{comp.name} {idx < COMPETENCIES.length - 1 ? '•' : ''}</span>
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-5 space-y-2">
-              <h2 className="text-sm font-extrabold tracking-wider text-stone-800 uppercase font-sans border-b border-stone-200 pb-1">Key Achievements</h2>
-              <ul className="list-disc pl-5 text-sm text-stone-800 space-y-1 font-sans">
-                {ACHIEVEMENTS.map((ach, idx) => <li key={idx}>{ach.text}</li>)}
-              </ul>
-            </div>
-
-            <div className="mt-5 space-y-4">
-              <h2 className="text-sm font-extrabold tracking-wider text-stone-800 uppercase font-sans border-b border-stone-200 pb-1">Professional Experience</h2>
-              {EXPERIENCE_HISTORY.map((exp, idx) => (
-                <div key={idx} className="space-y-1">
-                  <div className="flex flex-col sm:flex-row justify-between text-sm font-sans font-bold text-stone-950">
-                    <span className="text-base font-extrabold">{exp.role}</span>
-                    <span className="text-xs sm:text-sm font-normal text-stone-600">{exp.period}</span>
-                  </div>
-                  <div className="flex flex-col sm:flex-row justify-between text-xs sm:text-sm text-stone-700 italic font-sans">
-                    <span>{exp.company} — {exp.description}</span>
-                    <span className="not-italic text-stone-500">{exp.location}</span>
-                  </div>
-                  <ul className="list-disc pl-5 text-sm text-stone-800 space-y-1 font-sans">
-                    {exp.bulletPoints.map((bullet, bIdx) => <li key={bIdx}>{bullet}</li>)}
-                  </ul>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-5 space-y-2">
-              <h2 className="text-sm font-extrabold tracking-wider text-stone-800 uppercase font-sans border-b border-stone-200 pb-1">Certifications</h2>
-              <ul className="list-disc pl-5 text-sm text-stone-800 font-sans">{CERTIFICATIONS.map((cert, idx) => <li key={idx}>{cert}</li>)}</ul>
-            </div>
-
-            <div className="mt-5 space-y-3">
-              <h2 className="text-sm font-extrabold tracking-wider text-stone-800 uppercase font-sans border-b border-stone-200 pb-1">Education</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-sans text-stone-800">
-                {EDUCATION.map((edu, idx) => (
-                  <div key={idx}>
-                    <p className="font-extrabold text-stone-900">{edu.degree}</p>
-                    <p className="text-stone-600">{edu.institution}</p>
-                    <p className="text-stone-500">{edu.period}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      );
-    }
-
-    // Render App
-    const root = ReactDOM.createRoot(document.getElementById('portfolio-app'));
-    root.render(<PortfolioApp />);
+    ReactDOM.createRoot(document.getElementById('portfolio-app')).render(<PortfolioApp />);
   </script>
 
-  <!-- High-Performance Background Canvas Simulation Script -->
+  <!-- Interactive Canvas Animation -->
   <script>
     (function() {
       const canvas = document.getElementById('bg-network-canvas');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
-      let width = canvas.width = window.innerWidth;
-      let height = canvas.height = window.innerHeight;
-      
-      const nodes = [];
-      const connections = [];
-      const ripples = [];
-      const nodeCount = Math.min(Math.floor((width * height) / 18000), 45);
-      const majorLocations = ['Malta', 'Singapore', 'India', 'Lebanon', 'London', 'Dubai', 'New York'];
-      const mouse = { x: 0, y: 0, active: false };
+      let w = canvas.width = window.innerWidth;
+      let h = canvas.height = window.innerHeight;
 
-      // Initialize nodes
-      for (let i = 0; i < nodeCount; i++) {
-        nodes.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.4,
-          vy: (Math.random() - 0.5) * 0.4,
-          radius: Math.random() * 2 + 1.5,
-          id: i,
-          pulse: Math.random() * Math.PI,
-          label: i < majorLocations.length ? majorLocations[i] : undefined
-        });
-      }
+      const nodes = Array.from({ length: 30 }, (_, i) => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4
+      }));
 
-      // Build connections
-      for (let i = 0; i < nodes.length; i++) {
-        const targets = nodes
-          .filter(n => n.id !== nodes[i].id)
-          .map(n => ({ node: n, dist: Math.hypot(n.x - nodes[i].x, n.y - nodes[i].y) }))
-          .sort((a, b) => a.dist - b.dist)
-          .slice(0, Math.random() > 0.5 ? 2 : 1);
-
-        targets.forEach(target => {
-          const exists = connections.some(c => (c.from === nodes[i].id && c.to === target.node.id) || (c.from === target.node.id && c.to === nodes[i].id));
-          if (!exists && target.dist < 280) {
-            connections.push({
-              from: nodes[i],
-              to: target.node,
-              active: Math.random() > 0.3,
-              packetProgress: Math.random(),
-              packetSpeed: 0.002 + Math.random() * 0.004
-            });
-          }
-        });
-      }
-
-      // Resize
-      window.addEventListener('resize', () => {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-      });
-
-      // Interactive Events
-      window.addEventListener('mousemove', (e) => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-        mouse.active = true;
-      });
-      window.addEventListener('mouseleave', () => mouse.active = false);
-
-      window.addEventListener('click', (e) => {
-        ripples.push({
-          x: e.clientX,
-          y: e.clientY,
-          radius: 0,
-          maxRadius: 180 + Math.random() * 80,
-          opacity: 1,
-          speed: 3.5
-        });
-
-        connections.forEach(c => {
-          const d1 = Math.hypot(c.from.x - e.clientX, c.from.y - e.clientY);
-          if (d1 < 200) {
-            c.active = true;
-            c.packetSpeed = 0.012 + Math.random() * 0.008;
-          }
-        });
-      });
-
-      // Animation Loop
-      function draw() {
-        ctx.clearRect(0, 0, width, height);
-
-        // Gradient Background
-        const grad = ctx.createRadialGradient(width/2, height/2, 10, width/2, height/2, Math.max(width, height));
-        grad.addColorStop(0, '#fafaf9');
-        grad.addColorStop(0.5, '#f5f5f4');
-        grad.addColorStop(1, '#e7e5e4');
-        ctx.fillStyle = grad;
-        ctx.fillRect(0, 0, width, height);
-
-        // Ripples
-        for (let i = ripples.length - 1; i >= 0; i--) {
-          const r = ripples[i];
-          r.radius += r.speed;
-          r.opacity = 1 - r.radius / r.maxRadius;
-          if (r.opacity <= 0) {
-            ripples.splice(i, 1);
-            continue;
-          }
-          ctx.beginPath();
-          ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(99, 102, 241, ${r.opacity * 0.15})`;
-          ctx.lineWidth = 1.5;
-          ctx.stroke();
-        }
-
-        // Move Nodes
+      function animate() {
+        ctx.clearRect(0, 0, w, h);
         nodes.forEach(n => {
           n.x += n.vx;
           n.y += n.vy;
-          n.pulse += 0.02;
-
-          if (n.x < 0 || n.x > width) n.vx *= -1;
-          if (n.y < 0 || n.y > height) n.vy *= -1;
-
-          if (mouse.active) {
-            const md = Math.hypot(n.x - mouse.x, n.y - mouse.y);
-            if (md < 120) {
-              const force = (120 - md) / 120;
-              const angle = Math.atan2(n.y - mouse.y, n.x - mouse.x);
-              n.x += Math.cos(angle) * force * 1.5;
-              n.y += Math.sin(angle) * force * 1.5;
-            }
-          }
-        });
-
-        // Draw Connections
-        connections.forEach(c => {
-          const dist = Math.hypot(c.from.x - c.to.x, c.from.y - c.to.y);
-          if (dist > 350) return;
-          const alpha = (1 - dist / 350) * 0.2;
+          if (n.x < 0 || n.x > w) n.vx *= -1;
+          if (n.y < 0 || n.y > h) n.vy *= -1;
           ctx.beginPath();
-          ctx.moveTo(c.from.x, c.from.y);
-          ctx.lineTo(c.to.x, c.to.y);
-          ctx.strokeStyle = `rgba(120, 113, 108, ${alpha})`;
-          ctx.lineWidth = 0.75;
-          ctx.stroke();
-
-          if (c.active) {
-            c.packetProgress += c.packetSpeed;
-            if (c.packetProgress > 1) {
-              c.packetProgress = 0;
-              c.packetSpeed = 0.002 + Math.random() * 0.004;
-            }
-            const px = c.from.x + (c.to.x - c.from.x) * c.packetProgress;
-            const py = c.from.y + (c.to.y - c.from.y) * c.packetProgress;
-
-            ctx.beginPath();
-            ctx.arc(px, py, 3, 0, Math.PI * 2);
-            ctx.fillStyle = '#6366f1';
-            ctx.fill();
-          }
-        });
-
-        // Draw Nodes
-        nodes.forEach(n => {
-          const pulse = 1 + Math.sin(n.pulse) * 0.25;
-          const rad = n.radius * pulse;
-
-          if (n.label) {
-            ctx.beginPath();
-            ctx.arc(n.x, n.y, rad * 3, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(99, 102, 241, 0.05)';
-            ctx.fill();
-          }
-
-          ctx.beginPath();
-          ctx.arc(n.x, n.y, rad, 0, Math.PI * 2);
-          ctx.fillStyle = n.label ? '#4f46e5' : '#78716c';
+          ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
+          ctx.fillStyle = '#6366f1';
           ctx.fill();
-
-          if (n.label) {
-            ctx.font = '10px monospace';
-            ctx.fillStyle = '#44403c';
-            ctx.textAlign = 'center';
-            ctx.fillText(n.label, n.x, n.y - 12);
-          }
         });
-
-        requestAnimationFrame(draw);
+        requestAnimationFrame(animate);
       }
-
-      draw();
+      animate();
     })();
   </script>
 </body>
